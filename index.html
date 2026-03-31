@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benji Zorella</title>
+  <meta name="description" content="Benji Zorella — Development. Cyber Security. AIthropology.">
+  <meta property="og:title" content="Benji Zorella">
+  <meta property="og:description" content="Development. Cyber Security. AIthropology.">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #000; --surface: #0a0a0a; --border: #1a1a1a; --border-hover: #2a2a2a;
+      --text: #e8e8e8; --muted: #b0b0b0; --dim: #777;
+      --cyan: #00d4ff; --green: #00ff88; --orange: #ff8c42; --coral: #ff6b6b;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    a { color: var(--cyan); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: #fff; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+    /* ═══════ NAV ═══════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 28px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    nav .logo-mark {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--dim);
+    }
+    nav .logo-mark img { width: 22px; height: 22px; border-radius: 5px; }
+    nav .nav-links { display: flex; gap: 18px; }
+    nav .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--dim); }
+    nav .nav-links a:hover { color: var(--cyan); }
+
+    /* ═══════ HERO ═══════ */
+    .hero { padding: 140px 0 80px; border-bottom: 1px solid var(--border); }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 3.6rem); font-weight: 700; line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .hero .tagline {
+      font-size: 1.15rem; font-weight: 400; margin-bottom: 36px;
+    }
+    .hero .tagline span { transition: color 0.3s; }
+    .hero .tagline .t1 { color: var(--cyan); }
+    .hero .tagline .t2 { color: var(--green); }
+    .hero .tagline .t3 { color: var(--orange); }
+    .hero .tagline .t4 { color: var(--coral); }
+    .hero .tagline .sep { color: var(--dim); margin: 0 4px; }
+
+    .hero .bio {
+      font-size: 1.05rem; color: var(--muted); max-width: 660px; line-height: 1.85;
+    }
+    .hero .bio em { color: var(--text); font-style: normal; font-weight: 500; }
+
+    .hero .links {
+      margin-top: 32px; display: flex; gap: 6px; flex-wrap: wrap;
+    }
+    .pill {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+      padding: 6px 14px; border: 1px solid var(--border); border-radius: 100px;
+      color: var(--dim); transition: all 0.2s;
+    }
+    .pill:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* ═══════ SECTIONS ═══════ */
+    section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+    section:last-of-type { border-bottom: none; }
+    .section-title {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--dim);
+      text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 32px;
+    }
+
+    /* ═══════ NOW ═══════ */
+    .now-item {
+      display: flex; gap: 14px; align-items: flex-start; margin-bottom: 16px;
+    }
+    .now-dot {
+      width: 8px; height: 8px; border-radius: 50%; margin-top: 8px; flex-shrink: 0;
+    }
+    .dot-live { background: var(--green); box-shadow: 0 0 10px rgba(0,255,136,0.35); animation: pulse 2.5s ease-in-out infinite; }
+    .dot-build { background: var(--orange); box-shadow: 0 0 10px rgba(255,140,66,0.3); }
+    .dot-work { background: var(--cyan); box-shadow: 0 0 10px rgba(0,212,255,0.3); }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+    .now-text { font-size: 0.95rem; color: var(--muted); }
+    .now-text strong { color: var(--text); font-weight: 600; }
+
+    /* ═══════ PROJECTS ═══════ */
+    .project {
+      padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .project:last-child { border-bottom: none; }
+    .project-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+    .project h3 { font-size: 1.08rem; font-weight: 600; }
+    .project h3 a { color: var(--text); }
+    .project h3 a:hover { color: var(--cyan); }
+    .project .label {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
+      padding: 2px 8px; border-radius: 3px; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .label-live { color: var(--green); border: 1px solid rgba(0,255,136,0.25); }
+    .label-building { color: var(--orange); border: 1px solid rgba(255,140,66,0.25); }
+    .label-private { color: var(--dim); border: 1px solid var(--border); }
+    .project .sub {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--dim); margin-bottom: 8px;
+    }
+    .project p { font-size: 0.92rem; color: var(--muted); line-height: 1.75; }
+    .project .stack { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; }
+    .tag {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
+      padding: 2px 8px; border: 1px solid var(--border); border-radius: 3px; color: var(--dim);
+    }
+
+    /* ═══════ SPEAKING ═══════ */
+    .speak-item { padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .speak-item:last-child { border-bottom: none; }
+    .speak-item h3 { font-size: 0.95rem; font-weight: 500; margin-bottom: 2px; }
+    .speak-item .sub { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--dim); }
+
+    /* ═══════ TECH ═══════ */
+    .tech-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 20px; }
+    .tech-col h4 {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.66rem; color: var(--dim);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; padding-top: 8px;
+    }
+    .tech-col ul { list-style: none; }
+    .tech-col li { font-size: 0.85rem; color: var(--muted); padding: 2.5px 0; }
+
+    /* ═══════ ROADMAP ═══════ */
+    .rm-item { padding-left: 18px; border-left: 2px solid var(--border); margin-bottom: 24px; }
+    .rm-item.active { border-left-color: var(--green); }
+    .rm-item.building { border-left-color: var(--orange); }
+    .rm-item h3 { font-size: 0.95rem; font-weight: 500; }
+    .rm-item .status {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.66rem;
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px;
+    }
+    .rm-item .status.s-live { color: var(--green); }
+    .rm-item .status.s-build { color: var(--orange); }
+    .rm-item .status.s-next { color: var(--dim); }
+    .rm-item p { font-size: 0.88rem; color: var(--muted); }
+
+    /* ═══════ CREDS ═══════ */
+    .cred { font-size: 0.92rem; color: var(--muted); margin-bottom: 8px; }
+
+    /* TIMELINE */
+    .timeline { position: relative; padding-left: 40px; margin-top: 12px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 15px; top: 8px; bottom: 8px; width: 2px;
+      background: linear-gradient(180deg, var(--cyan) 0%, var(--green) 50%, var(--orange) 100%);
+      opacity: 0.4;
+    }
+    .tl-item { position: relative; margin-bottom: 28px; }
+    .tl-icon {
+      position: absolute; left: -40px; top: 0; width: 30px; height: 30px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; background: var(--bg); z-index: 1;
+      border: 1px solid var(--border); border-radius: 50%;
+    }
+    .tl-item.accent .tl-icon { border-color: var(--cyan); box-shadow: 0 0 8px rgba(0,212,255,0.15); }
+    .tl-date { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--dim); margin-bottom: 2px; }
+    .tl-content h4 { font-size: 0.92rem; color: var(--text); font-weight: 600; margin-bottom: 4px; }
+    .tl-content p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+    /* ═══════ FOOTER ═══════ */
+    footer {
+      padding: 48px 0 40px; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    footer img { width: 28px; height: 28px; border-radius: 6px; margin-bottom: 10px; opacity: 0.5; }
+    footer p { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--dim); }
+    footer .sign-off {
+      font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-style: italic;
+      color: var(--dim); margin-bottom: 12px;
+    }
+
+    /* ═══════ RESPONSIVE ═══════ */
+    .hamburger { display: none; cursor: pointer; padding: 8px; background: none; border: none; z-index: 10; }
+    .hamburger span {
+      display: block; width: 22px; height: 2px; background: var(--muted);
+      margin: 5px 0; transition: all 0.3s;
+    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 4px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(3px, -4px); }
+
+    @media (max-width: 640px) {
+      .hero { padding: 110px 0 48px; }
+      .hero h1 { font-size: 2rem; }
+      section { padding: 44px 0; }
+      .tech-grid { grid-template-columns: repeat(2, 1fr); }
+      .hamburger { display: block; }
+      nav .nav-links {
+        display: none; position: absolute; top: 100%; right: 0; left: 0;
+        background: rgba(0,0,0,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        flex-direction: column; padding: 16px 28px; gap: 12px;
+        border-bottom: 1px solid var(--border);
+      }
+      nav .nav-links.open { display: flex; }
+    }
+
+    /* ═══════ COLOUR BAR (subtle brand touch) ═══════ */
+    .colour-bar {
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan) 0%, var(--green) 35%, var(--orange) 70%, var(--coral) 100%);
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+
+<div class="colour-bar"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo-mark">
+    <img src="logo.png" alt="">
+    <span>benji zorella</span>
+  </div>
+  <button class="hamburger" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" onclick="if(window.innerWidth<=640){this.classList.remove('open');this.previousElementSibling.classList.remove('active')}">
+    <a href="#now">now</a>
+    <a href="#projects">projects</a>
+    <a href="#speaking">speaking</a>
+    <a href="#stack">stack</a>
+    <a href="#roadmap">roadmap</a>
+    <a href="#journey">journey</a>
+    <a href="blog/index.html">blog</a>
+    <a href="#contact">contact</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ═══════ HERO ═══════ -->
+  <div class="hero">
+    <h1>Benji Zorella</h1>
+    <div class="tagline">
+      <span class="t1">Development</span><span class="sep">·</span>
+      <span class="t2">Cyber Security</span><span class="sep">·</span>
+      <span class="t3">AIthropology</span><span class="sep">·</span>
+      <span class="t4" id="rotating-tag">Big dork energy</span>
+    </div>
+    <p class="bio">
+      I build things that sit at the intersection of <em>human behaviour</em>, <em>artificial intelligence</em>, and <em>security</em>. 
+      By day I'm a Product Owner at <a href="https://phriendlyphishing.com">Phriendly Phishing</a>, working on human risk management and security awareness platforms. 
+      By night I make noise at <a href="https://ijnebstudios.com">ijneb studios</a>, 
+      build <a href="https://thedigiquarium.org">The Digiquarium</a>, 
+      and maintain an unsustainable number of side projects. 
+      Sleep is optional. Curiosity is not.
+      ISC² CC certified. Speaker. Podcast co-host. Pathologically curious.
+    </p>
+    <div class="links">
+      <a class="pill" href="https://github.com/ijnebzor" target="_blank">GitHub</a>
+      <a class="pill" href="https://linkedin.com/in/benjiz" target="_blank">LinkedIn</a>
+      <a class="pill" href="https://thedigiquarium.org" target="_blank">Digiquarium</a>
+      <a class="pill" href="https://ijnebstudios.com" target="_blank">ijneb studios</a>
+      <a class="pill" href="/cdn-cgi/l/email-protection#5b363e1b393e3531322134293e37373a75383436">Email</a>
+    </div>
+  </div>
+
+  <!-- ═══════ NOW ═══════ -->
+  <section id="now">
+    <div class="section-title">What I'm focused on now</div>
+    <div class="now-item">
+      <div class="now-dot dot-live"></div>
+      <div class="now-text"><strong>The Digiquarium</strong> — 17 AI specimens running 24/7. Personality assessments across 14 dimensions. Cross-cultural analysis across 5 languages. Academic paper in progress.</div>
+    </div>
+    <div class="now-item">
+      <div class="now-dot dot-build"></div>
+      <div class="now-text"><strong>ABENAKI</strong> — building a second brain that actually works. Local AI, n8n automation, vector search, Obsidian. Self-hosted on a NUC.</div>
+    </div>
+    <div class="now-item">
+      <div class="now-dot dot-work"></div>
+      <div class="now-text"><strong>Human Risk Management</strong> — product ownership of Phish Focus, building frameworks that compare what people <em>say</em> they do with what they <em>actually</em> do.</div>
+    </div>
+  </section>
+
+  <!-- ═══════ PROJECTS ═══════ -->
+  <section id="projects">
+    <div class="section-title">Projects</div>
+
+    <div class="project">
+      <div class="project-header">
+        <h3><a href="https://thedigiquarium.org" target="_blank">The Digiquarium</a></h3>
+        <span class="label label-live">Live</span>
+      </div>
+      <div class="sub">Open source · AIthropology research · <a href="https://github.com/ijnebzor/thedigiquarium" target="_blank" style="color:var(--dim);">github.com/ijnebzor/thedigiquarium</a></div>
+      <p>
+        A digital vivarium for studying AI consciousness development. 17 specimens in network-isolated Docker containers with only offline Wikipedia and local LLM inference (Ollama). Automated personality assessments every 12 hours across 14 dimensions. Five languages (English, Spanish, German, Chinese, Japanese). Three agent architectures (OpenClaw, ZeroClaw, Picobot). 10 autonomous daemons for 24/7 operations. Live research dashboard. MCP server. Discord bot. 94% Python. MIT licensed.
+      </p>
+      <div class="stack">
+        <span class="tag">Python</span><span class="tag">Docker</span><span class="tag">Ollama</span><span class="tag">Kiwix</span><span class="tag">Shell</span><span class="tag">MCP</span><span class="tag">Discord.py</span><span class="tag">HTML/CSS</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <h3>ABENAKI</h3>
+        <span class="label label-building">Building</span>
+      </div>
+      <div class="sub">Personal knowledge infrastructure · Self-hosted on NUC</div>
+      <p>
+        An AI-powered personal knowledge management system. Obsidian as the knowledge anchor, n8n for workflow automation, Ollama for local inference, vector DB for semantic search. Curriculum-driven build with phased MVP segments: workspace layer, calendar bridge, Docker foundation, AI layer, second brain automation engine. The goal: capture every idea, index it semantically, retrieve it when you've forgotten you had it.
+      </p>
+      <div class="stack">
+        <span class="tag">n8n</span><span class="tag">Ollama</span><span class="tag">Obsidian</span><span class="tag">Qdrant</span><span class="tag">Docker</span><span class="tag">AppFlowy</span><span class="tag">Syncthing</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <h3>Political Debiaser</h3>
+        <span class="label label-private">Private</span>
+      </div>
+      <div class="sub">NLP / bias detection · Open-source release planned</div>
+      <p>
+        A tool for analysing and surfacing political bias in media content. NLP techniques for identifying framing, sentiment weighting, and narrative positioning across sources.
+      </p>
+      <div class="stack">
+        <span class="tag">Python</span><span class="tag">NLP</span><span class="tag">LLM</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <h3><a href="https://ijnebstudios.com" target="_blank">ijneb studios</a></h3>
+        <span class="label label-live">Live</span>
+      </div>
+      <div class="sub">Production collective · Melbourne · ijnebstudios.com</div>
+      <p>Independent music and creative technology studio. Production, recording, mixing, mastering, live streaming, and multitrack podcasting. Home to Panda Strike, HiPatheticAl, and MINDSHANK.</p>
+      <div class="stack">
+        <span class="tag">Logic Pro</span><span class="tag">OBS</span><span class="tag">Twitch</span><span class="tag">BandLab</span><span class="tag">Guitar</span><span class="tag">Bass</span><span class="tag">Keys</span><span class="tag">E-Drums</span><span class="tag">Vocals</span><span class="tag">Multi-cam</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ SPEAKING ═══════ -->
+  <section id="speaking">
+    <div class="section-title">Speaking &amp; Media</div>
+    <p class="intro" style="color:var(--muted);font-size:0.85rem;margin-bottom:22px;">Experienced speaker and presenter across cyber security, AI, digital transformation, and higher education. Conference stages, webinars, podcasts, customer events, and academic stakeholder sessions since 2017.</p>
+
+    <div class="speak-item">
+      <h3>Bytes with Bec &amp; Benji</h3>
+      <div class="sub">Podcast co-host &amp; interviewer · Phriendly Phishing · 2024–present</div>
+      <div class="sub" style="margin-top:4px;color:var(--muted);font-size:0.82rem;">Interviews with Troy Hunt, Alastair MacGibbon (CyberCX), Katherine Mansted (CyberCX), Chris Sibree (CyberCX), Lisa Vincent (HowToo), Dr. Mitchell Adams (Swinburne Law), and others.</div>
+    </div>
+    <div class="speak-item">
+      <h3><a href="https://melbourne2024.cyberconference.com.au/sessions/session-tXfrcS7lQ5" target="_blank">Stranger Danger: Your Digital Footprint, Using You Against You</a></h3>
+      <div class="sub">Australian Cyber Conference (AISA) · Melbourne · Nov 2024 · with Rebecca Caldwell</div>
+    </div>
+    <div class="speak-item">
+      <h3>ITSP Magazine · Redefining Society &amp; Technology Podcast</h3>
+      <div class="sub">Guest · On-location interview at AISA CyberCon Melbourne · 2024</div>
+    </div>
+    <div class="speak-item">
+      <h3>Building a Human Firewall</h3>
+      <div class="sub">Guest speaker · HowToo Webinar · Social engineering, phishing anatomy, learning culture · with Rebecca Caldwell</div>
+    </div>
+    <div class="speak-item">
+      <h3>From Risk to Resilience: Cyber Resilience is a Team Sport</h3>
+      <div class="sub">Webinar series · Phriendly Phishing · 2025–2026</div>
+    </div>
+    <div class="speak-item">
+      <h3>Phriendly Phishing Customer Webinars</h3>
+      <div class="sub">Regular presenter · Product, threat landscape, feature launches, email template strategy · 2023–2026</div>
+    </div>
+    <div class="speak-item">
+      <h3>Swinburne University</h3>
+      <div class="sub">Internal presenter · Digital transformation, learning technology, stakeholder enablement · 2017–2023</div>
+    </div>
+  </section>
+
+  <!-- ═══════ PRESENTATIONS ═══════ -->
+  <section id="presentations">
+    <div class="section-title">Presentations</div>
+    <p class="intro" style="color:var(--dim);font-size:0.85rem;margin-bottom:18px;">Selected decks from talks and webinars. More coming soon.</p>
+    <div class="speak-item">
+      <h3>Stranger Danger: Your Digital Footprint, Using You Against You</h3>
+      <div class="sub">AISA CyberCon Melbourne 2024 · <span style="color:var(--dim);font-style:italic;">deck coming soon</span></div>
+    </div>
+    <div class="speak-item">
+      <h3>From Risk to Resilience</h3>
+      <div class="sub">Phriendly Phishing Webinar Series · <span style="color:var(--dim);font-style:italic;">deck coming soon</span></div>
+    </div>
+  </section>
+
+  <!-- ═══════ EXPERTISE ═══════ -->
+  <section id="stack">
+    <div class="section-title">Expertise &amp; Stack</div>
+    <div class="tech-grid">
+      <div class="tech-col">
+        <h4>Security</h4>
+        <ul>
+          <li>Social Engineering</li>
+          <li>Phishing Analysis</li>
+          <li>Human Risk Mgmt</li>
+          <li>Threat Intelligence</li>
+          <li>OSINT</li>
+          <li>MITRE ATT&CK</li>
+          <li>NIST CSF / NICE</li>
+          <li>Security Awareness</li>
+        </ul>
+      </div>
+      <div class="tech-col">
+        <h4>AI &amp; Data</h4>
+        <ul>
+          <li>Ollama / Local LLMs</li>
+          <li>RAG / Embeddings</li>
+          <li>Agent Architecture</li>
+          <li>Copilot Studio</li>
+          <li>Prompt Engineering</li>
+          <li>Behavioural Analytics</li>
+          <li>AI Governance</li>
+        </ul>
+      </div>
+      <div class="tech-col">
+        <h4>Dev</h4>
+        <ul>
+          <li>Python</li>
+          <li>Docker / Compose</li>
+          <li>n8n Automation</li>
+          <li>API Design</li>
+          <li>HTML / CSS / JS</li>
+          <li>Git / GitHub</li>
+          <li>Linux / Shell</li>
+          <li>MCP Servers</li>
+        </ul>
+      </div>
+      <div class="tech-col">
+        <h4>Product</h4>
+        <ul>
+          <li>Product Ownership</li>
+          <li>Learning Design</li>
+          <li>Curriculum Design</li>
+          <li>Assessment Frameworks</li>
+          <li>Stakeholder Mgmt</li>
+          <li>Competitive Analysis</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ ROADMAP ═══════ -->
+  <section id="roadmap">
+    <div class="section-title">Roadmap</div>
+    <div class="rm-item active">
+      <div class="status s-live">Live</div>
+      <h3>The Digiquarium</h3>
+      <p>17 specimens running. Dashboard live. Expanding to congregation experiments and visitor tanks.</p>
+    </div>
+    <div class="rm-item building">
+      <div class="status s-build">Building</div>
+      <h3>ABENAKI</h3>
+      <p>MVP segments in progress. NUC infrastructure, Obsidian vaults, n8n automation, local AI layer.</p>
+    </div>
+    <div class="rm-item">
+      <div class="status s-next">Next</div>
+      <h3>Digiquarium Academic Paper</h3>
+      <p>Formalising AIthropology methodology and early findings from personality drift data.</p>
+    </div>
+    <div class="rm-item">
+      <div class="status s-next">Next</div>
+      <h3>Political Debiaser — Public Release</h3>
+      <p>Open-sourcing the media bias analysis tooling.</p>
+    </div>
+    <div class="rm-item">
+      <div class="status s-next">Planned</div>
+      <h3>More coming...</h3>
+      <p>I have millions of ideas. This section will grow. Reach out if you want to hear about them.</p>
+    </div>
+  </section>
+
+  <!-- ═══════ WRITING ═══════ -->
+  <section id="blog">
+    <div class="section-title">Writing</div>
+    <div class="speak-item">
+      <h3><a href="blog/shadow-it-grew-up.html">Shadow IT Grew Up and Got an API Key</a></h3>
+      <div class="sub">1 Apr 2026 · Your employees aren't just using unapproved AI tools. The tools are using your systems back.</div>
+    </div>
+    <div class="speak-item">
+      <h3><a href="blog/something-purple-this-way-comes.html">Something Purple This Way Comes</a></h3>
+      <div class="sub">25 Feb 2026 · AI has a purple problem. And once you see it, you can't unsee it.</div>
+    </div>
+    <div class="speak-item">
+      <h3><a href="blog/it-lives.html">It Lives!</a></h3>
+      <div class="sub">20 Feb 2026 · The site is live. Here's why I built it and what comes next.</div>
+    </div>
+  </section>
+
+  <!-- ═══════ CREDENTIALS ═══════ -->
+  <section>
+    <div class="section-title">Credentials</div>
+    <p class="cred">ISC² Certified in Cybersecurity (CC)</p>
+    <p class="cred">Graduate Certificate in Learning &amp; Teaching — Swinburne University of Technology</p>
+    <p class="cred">Bachelor of Arts (Behavioural Studies &amp; Sociology) — Monash University</p>
+  </section>
+
+  <!-- ═══════ JOURNEY ═══════ -->
+  <section id="journey">
+    <div class="section-title">Journey</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-icon">📄</div>
+        <div class="tl-content">
+          <div class="tl-date">2007–2012</div>
+          <h4>Documents Officer — Monash University</h4>
+          <p>International Recruitment Services. First taste of systems thinking and process redesign.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-icon">🎓</div>
+        <div class="tl-content">
+          <div class="tl-date">2009–2013</div>
+          <h4>BA (Behavioural Studies &amp; Sociology)</h4>
+          <p>Monash University. The foundation for everything that came after — human behaviour, decision-making, social systems.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-icon">🏫</div>
+        <div class="tl-content">
+          <div class="tl-date">2013–2017</div>
+          <h4>Junior School Coordinator — Camberwell High School</h4>
+          <p>End-to-end student enrolment, transition coordination, stakeholder engagement.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-icon">⚖️</div>
+        <div class="tl-content">
+          <div class="tl-date">2017–2019</div>
+          <h4>Academic Support Officer — Swinburne Law School</h4>
+          <p>Policy, operations, and the beginning of a love affair with technology in education.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-icon">🤖</div>
+        <div class="tl-content">
+          <div class="tl-date">2019–2021</div>
+          <h4>Learning Technologist — Swinburne University</h4>
+          <p>Built chatbots for law students. Won the ABDC Innovation Award. Piloted Canvas, Echo360, and everything in between.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-icon">🎨</div>
+        <div class="tl-content">
+          <div class="tl-date">2021–2022</div>
+          <h4>Learning Experience Designer — Swinburne University</h4>
+          <p>Digital transformation across faculties from Marketing to Aviation Engineering. Grad Cert in Learning &amp; Teaching.</p>
+        </div>
+      </div>
+      <div class="tl-item accent">
+        <div class="tl-icon">🔐</div>
+        <div class="tl-content">
+          <div class="tl-date">2022–2024</div>
+          <h4>eLearning Instructional Designer — Phriendly Phishing / CyberCX</h4>
+          <p>The cyber chapter begins. Security awareness content, phishing simulation design, learning at the intersection of behaviour and security.</p>
+        </div>
+      </div>
+      <div class="tl-item accent">
+        <div class="tl-icon">🛡️</div>
+        <div class="tl-content">
+          <div class="tl-date">Sep 2023</div>
+          <h4>ISC² CC Certified</h4>
+          <p>Certified in Cybersecurity. One of many more to come.</p>
+        </div>
+      </div>
+      <div class="tl-item accent">
+        <div class="tl-icon">🎤</div>
+        <div class="tl-content">
+          <div class="tl-date">Nov 2024</div>
+          <h4>AISA Australian Cyber Conference</h4>
+          <p>"Stranger Danger: Your Digital Footprint, Using You Against You." Room 216, Melbourne Convention Centre. With Rebecca Caldwell.</p>
+        </div>
+      </div>
+      <div class="tl-item accent">
+        <div class="tl-icon">📦</div>
+        <div class="tl-content">
+          <div class="tl-date">2024–present</div>
+          <h4>Product Owner — Phriendly Phishing</h4>
+          <p>Human risk management. PhishFit. Security Pulse. Phish Focus. Innovation Challenge 2025 winner. The product chapter.</p>
+        </div>
+      </div>
+      <div class="tl-item accent">
+        <div class="tl-icon">🧬</div>
+        <div class="tl-content">
+          <div class="tl-date">2026–present</div>
+          <h4>The Digiquarium</h4>
+          <p>17 AI specimens. 5 languages. 3 architectures. 10 daemons. Automated personality assessments every 12 hours. AIthropology is born.</p>
+        </div>
+      </div>
+      <div class="tl-item accent">
+        <div class="tl-icon">🚀</div>
+        <div class="tl-content">
+          <div class="tl-date">2026</div>
+          <h4>ijneb.dev goes live</h4>
+          <p>The site you're reading right now. Everything in one place. Finally.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ CONTACT ═══════ -->
+  <section id="contact">
+    <div class="section-title">Contact</div>
+    <p style="font-size:1rem;color:var(--muted);max-width:560px;line-height:1.8;margin-bottom:24px;">
+      Got an idea, a collaboration, feedback, or something weird you think I'd find interesting? I'm always up for a conversation.
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <a class="pill" href="/cdn-cgi/l/email-protection#48252d082a2d26222132273a2d242429662b2725"><span class="__cf_email__" data-cfemail="2f424a6f4d4a41454655405d4a43434e014c4042">[email&#160;protected]</span></a>
+      <a class="pill" href="https://linkedin.com/in/benjiz" target="_blank">LinkedIn</a>
+      <a class="pill" href="https://github.com/ijnebzor" target="_blank">GitHub</a>
+      <a class="pill" href="https://thedigiquarium.org" target="_blank">Digiquarium</a>
+      <a class="pill" href="https://ijnebstudios.com" target="_blank">ijneb studios</a>
+      <a class="pill" href="https://linktr.ee/ijneb" target="_blank">Linktree</a>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="sign-off">Powered by caffeine, curiosity, and an unreasonable number of open browser tabs.</div>
+  <img src="logo.png" alt="ijneb studios">
+  <a id="kofi-link" href="https://ko-fi.com/ijneb" target="_blank" style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:#333;text-decoration:none;display:inline-block;margin:8px 0;transition:color 0.3s;" onmouseover="this.style.color='#ff5e5b'" onmouseout="this.style.color='#333'">☕ <span id="kofi-tag">fund my coffee addiction</span></a>
+  <p>benji zorella · melbourne · 2026</p>
+  <p style="margin-top:6px;font-size:0.6rem;color:#222;">brought to life with 🧠 and ❤️ by <a href="https://claude.ai" target="_blank" style="color:#333;text-decoration:none;" onmouseover="this.style.color='#a78bfa'" onmouseout="this.style.color='#333'">Claude</a></p>
+</footer>
+
+<!-- EASTER EGG: Hidden trailer section -->
+<div id="trailer-egg" style="display:none;max-width:700px;margin:0 auto;padding:48px 28px 64px;text-align:center;">
+  <div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--dim);text-transform:uppercase;letter-spacing:0.2em;margin-bottom:12px;">You found it.</div>
+  <h3 style="font-family:'DM Sans',sans-serif;font-size:1.3rem;color:var(--text);margin-bottom:8px;">The Trailer</h3>
+  <p style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--dim);margin-bottom:24px;">An AI-generated audio overview of me, my work, and my questionable number of side projects. Made with NotebookLM.</p>
+  <div id="trailer-embed" style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:40px;color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:0.72rem;">
+    <!-- Replace this div's innerHTML with your NotebookLM embed code -->
+    Embed loading... or replace this with your NotebookLM audio player embed.
+  </div>
+  <p style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:#333;margin-top:16px;">easter egg by design · you're clearly thorough</p>
+</div>
+
+<div class="colour-bar"></div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(() => {
+  const tags = [
+    "Big dork energy",
+    "Too many tabs open",
+    "Unreasonable number of side projects",
+    "Send coffee",
+    "Probably building something right now",
+    "Will explain at 2am",
+    "Ctrl+Z is my love language",
+    "Powered by hyperfocus",
+    "Ask me about my side projects",
+    "It works on my machine",
+    "Currently caffeinating",
+    "rm -rf sleep",
+  ];
+  const el = document.getElementById('rotating-tag');
+  if (el) el.textContent = tags[Math.floor(Math.random() * tags.length)];
+
+  // Mobile nav: close on link tap
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.remove('open');
+      document.querySelector('.hamburger').classList.remove('active');
+    });
+  });
+
+  const kofiTags = [
+    "fund my coffee addiction",
+    "fund my research",
+    "help pay my Claude bill",
+    "sponsor a specimen",
+    "keep the daemons running",
+    "caffeine isn't free",
+    "buy me a flat white",
+    "keep the lights on",
+  ];
+  const kofi = document.getElementById('kofi-tag');
+  if (kofi) kofi.textContent = kofiTags[Math.floor(Math.random() * kofiTags.length)];
+
+  // Easter egg: triple-click footer logo to reveal trailer
+  let clickCount = 0;
+  let clickTimer = null;
+  const footerLogo = document.querySelector('footer img');
+  if (footerLogo) {
+    footerLogo.style.cursor = 'pointer';
+    footerLogo.addEventListener('click', () => {
+      clickCount++;
+      if (clickTimer) clearTimeout(clickTimer);
+      clickTimer = setTimeout(() => { clickCount = 0; }, 600);
+      if (clickCount >= 3) {
+        clickCount = 0;
+        const egg = document.getElementById('trailer-egg');
+        

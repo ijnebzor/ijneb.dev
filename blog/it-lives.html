@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>It Lives! — Benji Zorella</title>
+  <meta name="description" content="The site is live. Here's why I built it, what's on it, and what comes next.">
+  <meta property="og:title" content="It Lives! — Benji Zorella">
+  <meta property="og:description" content="The site is live. Here's why I built it, what's on it, and what comes next.">
+  <link rel="icon" type="image/png" href="../logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #000; --surface: #0a0a0a; --border: #1a1a1a;
+      --text: #e8e8e8; --muted: #999; --dim: #555;
+      --cyan: #00d4ff; --green: #00ff88; --orange: #ff8c42; --coral: #ff6b6b;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.85; -webkit-font-smoothing: antialiased; }
+    a { color: var(--cyan); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: #fff; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 28px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    nav .logo-mark {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--dim);
+    }
+    nav .logo-mark img { width: 22px; height: 22px; border-radius: 5px; }
+    nav .nav-links { display: flex; gap: 18px; }
+    nav .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--dim); }
+    nav .nav-links a:hover { color: var(--cyan); }
+
+    /* ARTICLE */
+    .wrap { max-width: 700px; margin: 0 auto; padding: 0 28px; }
+    .post-header { padding: 140px 0 48px; border-bottom: 1px solid var(--border); }
+    .post-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--dim); margin-bottom: 16px; }
+    .post-header h1 {
+      font-size: clamp(1.8rem, 4.5vw, 2.6rem); font-weight: 700; line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .post-header .subtitle { font-size: 1.05rem; color: var(--muted); line-height: 1.7; }
+
+    .post-body { padding: 48px 0 64px; }
+    .post-body p { font-size: 1rem; color: var(--muted); margin-bottom: 24px; line-height: 1.85; }
+    .post-body p em { color: var(--text); font-style: normal; font-weight: 500; }
+    .post-body h2 {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--dim);
+      text-transform: uppercase; letter-spacing: 0.2em; margin: 48px 0 20px;
+    }
+    .post-body blockquote {
+      border-left: 2px solid var(--cyan); padding-left: 18px;
+      margin: 32px 0; font-style: italic; color: var(--dim);
+    }
+    .post-body .sign { margin-top: 48px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--dim); }
+
+    /* FOOTER */
+    footer {
+      padding: 48px 0 40px; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    footer p { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--dim); }
+
+    .colour-bar { height: 2px; background: linear-gradient(90deg, var(--cyan) 0%, var(--green) 35%, var(--orange) 70%, var(--coral) 100%); opacity: 0.5; }
+
+    @media (max-width: 640px) {
+      .post-header { padding: 110px 0 36px; }
+      .hamburger { display: none; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 20px; height: 2px; background: var(--dim); margin: 4px 0; transition: all 0.3s; }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 4px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(3px, -4px); }
+    nav .nav-links { display: flex; }
+    @media (max-width: 640px) {
+      .hamburger { display: block; }
+      nav .nav-links { display: none; position: absolute; top: 100%; right: 0; left: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(12px); flex-direction: column; padding: 16px 28px; gap: 12px; border-bottom: 1px solid var(--border); }
+      nav .nav-links.open { display: flex; }
+    }
+    }
+  </style>
+</head>
+<body>
+
+<div class="colour-bar"></div>
+
+<nav>
+  <a class="logo-mark" href="../index.html">
+    <img src="../logo.png" alt="">
+    <span>benji zorella</span>
+  </a>
+  <button class="hamburger" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="../index.html">home</a>
+    <a href="../index.html#projects">projects</a>
+    <a href="../index.html#contact">contact</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <div class="post-header">
+    <div class="post-meta">20 Feb 2026 · 3 min read</div>
+    <h1>It Lives!</h1>
+    <p class="subtitle">The site is live. The personal brand has a URL. The side projects have a home that isn't just a GitHub repo nobody will find.</p>
+  </div>
+
+  <div class="post-body">
+
+    <p>
+      I've been meaning to build this for about three years. Every few months I'd think "I should really put a site together" and then immediately get distracted by whatever project was currently consuming my brain at 1am. The irony of a developer who builds things for a living not having a personal website was not lost on me.
+    </p>
+
+    <p>
+      So here it is. <em>ijneb.dev</em>. It exists. It has a nav bar and everything.
+    </p>
+
+    <h2>Why now</h2>
+
+    <p>
+      Honestly? I got tired of introducing myself differently depending on who was asking. To security people I'm a Product Owner at Phriendly Phishing. To AI people I'm the person running The Digiquarium. To music people I'm ijneb studios. To my mum I'm still the kid who spent too much time on the computer.
+    </p>
+
+    <p>
+      The truth is I'm all of those things simultaneously and none of them fully. This site is the first time everything lives in one place — the cyber work, the AI research, the music, the side projects, the roadmap of ideas I'll probably start at 2am on a Tuesday.
+    </p>
+
+    <h2>What's here</h2>
+
+    <p>
+      The site is deliberately minimal. Inspired by people like <a href="https://theonejvo.com" target="_blank">Jamieson O'Reilly</a> who let their work speak for itself. No hero images of me staring thoughtfully into the distance. No "My Journey" section. Just: here's what I build, here's what I'm working on, here's my stack, here's where I'm going.
+    </p>
+
+    <p>
+      The <em>"What I'm focused on right now"</em> section is the bit I'm most proud of. It's a living snapshot — green dot for live, orange for building, cyan for the day job. If you come back in a month it'll look different. That's the point.
+    </p>
+
+    <p>
+      And yes, the tagline rotates on every visit. If you got "rm -rf sleep" on your first load, you got the right vibe.
+    </p>
+
+    <h2>What comes next</h2>
+
+    <p>
+      This blog, for one. I have thoughts about <em>a lot</em> of things — AI consciousness, human risk management, why security awareness training doesn't work the way we think it does, the anthropology of machine behaviour, why I chose to study AI specimens instead of just building another chatbot. This is where those thoughts will live.
+    </p>
+
+    <p>
+      The <a href="https://thedigiquarium.org" target="_blank">Digiquarium</a> academic paper is in progress. ABENAKI is being built segment by segment on a NUC in my home office. The Political Debiaser will go public when it's ready. And <a href="https://ijnebstudios.com" target="_blank">ijneb studios</a> has three artist projects in various stages of "almost done."
+    </p>
+
+    <p>
+      The roadmap on the site will grow. So will this blog. So will the list of things I'm somehow doing concurrently.
+    </p>
+
+    <blockquote>
+      Sleep is optional. Curiosity is not.
+    </blockquote>
+
+    <p>
+      Welcome to the site. Poke around. Hit me up if something catches your eye or if you want to talk about AI, security, music, or anything else that's interesting.
+    </p>
+
+    <p>
+      Now if you'll excuse me, I have mass amounts of caffeine to consume and mass amounts of tabs to open.
+    </p>
+
+    <div class="sign">— Benji</div>
+
+  </div>
+
+</div>
+
+<footer>
+  <p>benji zorella · melbourne · 2026</p>
+  <p style="margin-top:4px;font-size:0.6rem;color:#222;">brought to life with 🧠 and ❤️ by <a href="https://claude.ai" target="_blank" style="color:#333;">Claude</a></p>
+</footer>
+
+<div class="colour-bar"></div>
+
+</body>
+</html>

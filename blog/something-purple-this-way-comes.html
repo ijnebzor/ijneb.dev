@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Something Purple This Way Comes — Benji Zorella</title>
+  <meta name="description" content="AI has a purple problem. And once you see it, you can't unsee it.">
+  <meta property="og:title" content="Something Purple This Way Comes — Benji Zorella">
+  <meta property="og:description" content="AI has a purple problem. And once you see it, you can't unsee it.">
+  <link rel="icon" type="image/png" href="../logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #000; --surface: #0a0a0a; --border: #1a1a1a;
+      --text: #e8e8e8; --muted: #b0b0b0; --dim: #777;
+      --cyan: #00d4ff; --green: #00ff88; --orange: #ff8c42; --coral: #ff6b6b;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.85; -webkit-font-smoothing: antialiased; }
+    a { color: var(--cyan); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: #fff; }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 28px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    nav .logo-mark {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--dim);
+    }
+    nav .logo-mark img { width: 22px; height: 22px; border-radius: 5px; }
+    nav .nav-links { display: flex; gap: 18px; }
+    nav .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--dim); }
+    nav .nav-links a:hover { color: var(--cyan); }
+    .wrap { max-width: 700px; margin: 0 auto; padding: 0 28px; }
+    .post-header { padding: 140px 0 48px; border-bottom: 1px solid var(--border); }
+    .post-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--dim); margin-bottom: 16px; }
+    .post-header h1 {
+      font-size: clamp(1.8rem, 4.5vw, 2.6rem); font-weight: 700; line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .post-header .subtitle { font-size: 1.05rem; color: var(--muted); line-height: 1.7; }
+    .post-body { padding: 48px 0 64px; }
+    .post-body p { font-size: 1rem; color: var(--muted); margin-bottom: 24px; line-height: 1.85; }
+    .post-body p em { color: var(--text); font-style: normal; font-weight: 500; }
+    .post-body h2 {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--dim);
+      text-transform: uppercase; letter-spacing: 0.2em; margin: 48px 0 20px;
+    }
+    .post-body blockquote {
+      border-left: 2px solid #6366f1; padding-left: 18px;
+      margin: 32px 0; font-style: italic; color: var(--dim);
+    }
+    .post-body code {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.88rem;
+      background: #111; padding: 2px 6px; border-radius: 3px; color: #a78bfa;
+    }
+    .post-body .sign { margin-top: 48px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--dim); }
+    footer {
+      padding: 48px 0 40px; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    footer p { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--dim); }
+    .colour-bar { height: 2px; background: linear-gradient(90deg, var(--cyan) 0%, var(--green) 35%, var(--orange) 70%, var(--coral) 100%); opacity: 0.5; }
+    @media (max-width: 640px) {
+      .post-header { padding: 110px 0 36px; }
+      .hamburger { display: none; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 20px; height: 2px; background: var(--dim); margin: 4px 0; transition: all 0.3s; }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 4px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(3px, -4px); }
+    nav .nav-links { display: flex; }
+    @media (max-width: 640px) {
+      .hamburger { display: block; }
+      nav .nav-links { display: none; position: absolute; top: 100%; right: 0; left: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(12px); flex-direction: column; padding: 16px 28px; gap: 12px; border-bottom: 1px solid var(--border); }
+      nav .nav-links.open { display: flex; }
+    }
+    }
+  </style>
+</head>
+<body>
+
+<div class="colour-bar"></div>
+
+<nav>
+  <a class="logo-mark" href="../index.html">
+    <img src="../logo.png" alt="">
+    <span>benji zorella</span>
+  </a>
+  <button class="hamburger" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="../index.html">home</a>
+    <a href="../index.html#projects">projects</a>
+    <a href="../index.html#contact">contact</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <div class="post-header">
+    <div class="post-meta">25 Feb 2026 · 5 min read</div>
+    <h1>Something Purple This Way Comes</h1>
+    <p class="subtitle">AI has a purple problem. And once you see it, you absolutely cannot unsee it.</p>
+  </div>
+
+  <div class="post-body">
+
+    <p>
+      Open any AI coding tool. Ask it to build you a landing page. Don't specify colours. Don't specify a brand. Just say "build me a modern website."
+    </p>
+
+    <p>
+      Go on. I'll wait.
+    </p>
+
+    <p>
+      It's purple, isn't it.
+    </p>
+
+    <p>
+      Dark background. Gradient heading. Buttons in some shade of indigo-violet. Maybe a subtle purple-to-blue sweep in the hero section. Cards with rounded corners. The same sans-serif font. The exact same layout you've seen on every AI-generated demo since 2024.
+    </p>
+
+    <p>
+      Welcome to the <em>purple problem</em>.
+    </p>
+
+    <h2>One line of CSS to rule them all</h2>
+
+    <p>
+      In August 2025, Adam Wathan — the creator of Tailwind CSS — posted what might be the most accidentally consequential confession in frontend history. He apologised for setting every button in Tailwind UI to <code>bg-indigo-500</code> five years ago, which he said had caused every AI-generated interface on earth to also be indigo.
+    </p>
+
+    <p>
+      He wasn't entirely joking. The mechanism is straightforward: Tailwind became the most popular utility-first CSS framework on the planet. Thousands of tutorials, open-source projects, and template libraries used its defaults. Those defaults included <code>bg-indigo-500</code> — a pleasant blue-purple that sits somewhere between "professional" and "not boring." Developers copied the examples. The examples proliferated. And when large language models were trained on scraped web data, they ingested millions of pages where "button" correlated with "indigo."
+    </p>
+
+    <p>
+      The AI didn't develop an aesthetic preference. It developed a <em>statistical association</em>. Ask it to make a button? Indigo. Ask it to make a dashboard? Indigo. Ask it to make a medieval castle in a game? Somehow, also indigo.
+    </p>
+
+    <h2>The self-reinforcing loop</h2>
+
+    <p>
+      Here's where it gets interesting from a behavioural perspective — and this is where my brain goes, because I study what happens when AI systems develop patterns without human intent.
+    </p>
+
+    <p>
+      As AI tools generate more purple websites, those websites go live. They become part of the training data for the next generation of models. Which learn that purple is even more common. Which generate even more purple websites. The cycle accelerates. Someone described this as the "blue-purple singularity" and honestly, they're not wrong.
+    </p>
+
+    <p>
+      This is a feedback loop that's functionally identical to the ones I study in <a href="https://thedigiquarium.org" target="_blank">The Digiquarium</a> — where AI specimens in isolated environments develop distinct behaviours based on what they're exposed to. Give them a biased information source, they develop biased worldviews. Give an LLM a biased colour palette, it develops a biased aesthetic. The mechanism is the same. The scale is different.
+    </p>
+
+    <h2>Why this matters beyond aesthetics</h2>
+
+    <p>
+      "So what? Purple's nice. Who cares?"
+    </p>
+
+    <p>
+      Fair question. Here's why I care.
+    </p>
+
+    <p>
+      In my day job, I work in cyber security. Specifically, I work on the human side — how people perceive risk, how they make decisions, where their self-assessment diverges from reality. And one of the things I think about constantly is <em>how we detect things that aren't what they appear to be</em>.
+    </p>
+
+    <p>
+      Phishing emails work because they look legitimate. Deepfakes work because they look real. And AI-generated content — whether it's text, images, or entire websites — is increasingly difficult to distinguish from human-made content. That's a problem if you work in trust, verification, or security.
+    </p>
+
+    <p>
+      But right now, purple is giving the game away.
+    </p>
+
+    <p>
+      The AI purple problem is an accidental watermark. A visual tell. If you see a website with a dark background, indigo gradients, rounded cards, and no clear brand identity — there's a reasonable chance it was generated, not designed. Not because purple is inherently artificial, but because the statistical fingerprint of AI-generated design is currently, hilariously, a specific shade of blue-purple that traces back to one man's CSS defaults.
+    </p>
+
+    <h2>A detection heuristic hiding in plain sight</h2>
+
+    <p>
+      This is useful. Not as a definitive test — plenty of human designers use indigo, and plenty of AI-generated sites have been prompted to use other colours. But as a heuristic? As a first-pass indicator that something might warrant a closer look? Purple is surprisingly reliable right now.
+    </p>
+
+    <p>
+      Think about it from a security awareness perspective. We teach people to look for visual inconsistencies in phishing emails — mismatched logos, weird formatting, unusual sender addresses. The purple problem is the same kind of pattern, just applied to web design. It's a cognitive shortcut: "this looks like every other AI-generated thing I've seen" is a valid signal, even if it's not proof.
+    </p>
+
+    <p>
+      And the security implications go further. AI-generated phishing landing pages are becoming more common. If the attacker uses an AI tool to spin up a credential harvesting page and doesn't bother overriding the defaults... it's going to be purple. It's going to have rounded corners and a gradient. It's going to look exactly like the output of every "build me a login page" prompt ever written. And that sameness is, paradoxically, a weakness for the attacker.
+    </p>
+
+    <h2>The uncomfortable parallel</h2>
+
+    <p>
+      The deeper lesson here isn't about colour. It's about what happens when AI systems learn from narrow, unrepresentative data and then generate outputs that further narrow the data for the next generation. That's model collapse. That's training data contamination. That's the homogenisation of culture through statistical averaging.
+    </p>
+
+    <p>
+      We're watching it happen in real time with a colour palette, which is almost funny. But the same dynamic applies to writing style, to code architecture, to design patterns, to decision-making frameworks. Anywhere AI learns from human output and then generates more of the same, the distribution gets narrower. The tails disappear. The median dominates.
+    </p>
+
+    <p>
+      My site, incidentally, uses cyan, green, and orange. Not because I'm making a statement. But because I built it deliberately rather than accepting the first thing an AI suggested.
+    </p>
+
+    <p>
+      Well. Maybe it's a little bit of a statement.
+    </p>
+
+    <h2>What to do about it</h2>
+
+    <p>
+      If you're building things with AI tools — and you should be, they're genuinely powerful — just be intentional about overriding the defaults. Specify your brand colours. Give the model a design system to work within. Don't accept the first output. If everything looks the same, that's not a feature. That's a bug in your process.
+    </p>
+
+    <p>
+      And if you work in security: start noticing the purple. Train your eye. It won't be a reliable signal forever — eventually models will diversify, or attackers will get smarter about overriding defaults. But right now, in early 2026, the purple tell is surprisingly consistent. Use it while it lasts.
+    </p>
+
+    <blockquote>
+      The next time you see a purple gradient, ask yourself: did a human choose that colour? Or did a statistical model pick the path of least resistance?
+    </blockquote>
+
+    <p>
+      The answer matters more than you think.
+    </p>
+
+    <div class="sign">— Benji</div>
+
+  </div>
+
+</div>
+
+<footer>
+  <p>benji zorella · melbourne · 2026</p>
+  <p style="margin-top:4px;font-size:0.6rem;color:#222;">brought to life with 🧠 and ❤️ by <a href="https://claude.ai" target="_blank" style="color:#333;">Claude</a></p>
+</footer>
+
+<div class="colour-bar"></div>
+
+</body>
+</html>

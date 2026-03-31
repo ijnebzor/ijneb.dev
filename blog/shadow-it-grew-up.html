@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shadow IT Grew Up and Got an API Key — Benji Zorella</title>
+  <meta name="description" content="Your employees aren't just using unapproved AI tools. The tools are using your systems back.">
+  <meta property="og:title" content="Shadow IT Grew Up and Got an API Key — Benji Zorella">
+  <meta property="og:description" content="Your employees aren't just using unapproved AI tools. The tools are using your systems back.">
+  <link rel="icon" type="image/png" href="../logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #000; --surface: #0a0a0a; --border: #1a1a1a;
+      --text: #e8e8e8; --muted: #b0b0b0; --dim: #777;
+      --cyan: #00d4ff; --green: #00ff88; --orange: #ff8c42; --coral: #ff6b6b;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.85; -webkit-font-smoothing: antialiased; }
+    a { color: var(--cyan); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: #fff; }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 28px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    nav .logo-mark {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--dim);
+    }
+    nav .logo-mark img { width: 22px; height: 22px; border-radius: 5px; }
+    nav .nav-links { display: flex; gap: 18px; }
+    nav .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--dim); }
+    nav .nav-links a:hover { color: var(--cyan); }
+    .hamburger { display: none; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 20px; height: 2px; background: var(--dim); margin: 4px 0; transition: all 0.3s; }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 4px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(3px, -4px); }
+    @media (max-width: 640px) {
+      .hamburger { display: block; }
+      nav .nav-links { display: none; position: absolute; top: 100%; right: 0; left: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(12px); flex-direction: column; padding: 16px 28px; gap: 12px; border-bottom: 1px solid var(--border); }
+      nav .nav-links.open { display: flex; }
+    }
+    .wrap { max-width: 700px; margin: 0 auto; padding: 0 28px; }
+    .post-header { padding: 140px 0 48px; border-bottom: 1px solid var(--border); }
+    .post-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--dim); margin-bottom: 16px; }
+    .post-header h1 {
+      font-size: clamp(1.8rem, 4.5vw, 2.6rem); font-weight: 700; line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .post-header .subtitle { font-size: 1.05rem; color: var(--muted); line-height: 1.7; }
+    .post-body { padding: 48px 0 64px; }
+    .post-body p { font-size: 1rem; color: var(--muted); margin-bottom: 24px; line-height: 1.85; }
+    .post-body p em { color: var(--text); font-style: normal; font-weight: 500; }
+    .post-body h2 {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--dim);
+      text-transform: uppercase; letter-spacing: 0.2em; margin: 48px 0 20px;
+    }
+    .post-body blockquote {
+      border-left: 2px solid var(--orange); padding-left: 18px;
+      margin: 32px 0; font-style: italic; color: var(--dim);
+    }
+    .post-body code {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.88rem;
+      background: #111; padding: 2px 6px; border-radius: 3px; color: var(--orange);
+    }
+    .post-body .sign { margin-top: 48px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--dim); }
+    footer {
+      padding: 48px 0 40px; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    footer p { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--dim); }
+    .colour-bar { height: 2px; background: linear-gradient(90deg, var(--cyan) 0%, var(--green) 35%, var(--orange) 70%, var(--coral) 100%); opacity: 0.5; }
+    @media (max-width: 640px) {
+      .post-header { padding: 110px 0 36px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="colour-bar"></div>
+
+<nav>
+  <a class="logo-mark" href="../index.html">
+    <img src="../logo.png" alt="">
+    <span>benji zorella</span>
+  </a>
+  <button class="hamburger" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links">
+    <a href="../index.html">home</a>
+    <a href="../index.html#projects">projects</a>
+    <a href="../index.html#speaking">speaking</a>
+    <a href="../index.html#contact">contact</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <div class="post-header">
+    <div class="post-meta">1 Apr 2026 · 6 min read</div>
+    <h1>Shadow IT Grew Up and Got an API Key</h1>
+    <p class="subtitle">Your employees aren't just using unapproved AI tools. The tools are using your systems back.</p>
+  </div>
+
+  <div class="post-body">
+
+    <p>
+      Remember shadow IT? Some rogue marketing manager signs up for Trello because the approved project management tool is terrible. Someone in finance starts using a personal Dropbox because the SharePoint migration is six months overdue. IT finds out, has a mild aneurysm, writes a policy document, and everyone moves on.
+    </p>
+
+    <p>
+      That was the old game. Store data somewhere unapproved. Move files where they shouldn't go. The risk was <em>data at rest in the wrong place</em>. Annoying, but containable.
+    </p>
+
+    <p>
+      The new game is different. The new game has teeth.
+    </p>
+
+    <h2>Shadow AI is not shadow IT with a rebrand</h2>
+
+    <p>
+      The critical difference between someone using an unapproved Trello board and someone deploying an unapproved AI agent is what happens to the data after it arrives. Shadow IT stores your data. Shadow AI <em>processes, learns from, generates new content based on, and takes autonomous action with</em> your data. That's not the same risk profile. That's not even the same sport.
+    </p>
+
+    <p>
+      An employee pastes customer records into ChatGPT to write a report. That data is now outside your perimeter, potentially cached, potentially used for training, permanently outside your control. That's bad, but it's the <em>passive</em> version of the problem — and it's already everywhere. Research from Menlo found that 68% of employees use personal accounts to access free AI tools, with 57% of them feeding in sensitive data. Nearly 80% of enterprises have already experienced negative AI-related data incidents.
+    </p>
+
+    <p>
+      But the passive version is last year's problem. The active version is what keeps me up at night.
+    </p>
+
+    <h2>Enter the agents</h2>
+
+    <p>
+      Agentic AI — systems that plan, reason, and execute multi-step tasks without a human approving each step — is arriving at a pace that makes governance frameworks look like they were written in pencil during a power outage. Gartner predicts 40% of enterprise applications will feature task-specific AI agents by the end of 2026, up from under 5% in 2025. That's not a gradual adoption curve. That's a vertical line.
+    </p>
+
+    <p>
+      And employees aren't waiting for IT to approve them. They're building agents with no-code tools. They're connecting them to CRMs, to email, to customer databases. They're giving write access to systems that handle money, personal information, and business decisions. An agent doesn't just leak your data — it <em>acts on your data</em>. It responds to customers. It approves transactions. It modifies workflows. All autonomously. All outside governance.
+    </p>
+
+    <p>
+      This is BYOD, except the D stands for daemon.
+    </p>
+
+    <h2>The nightmare scenarios write themselves</h2>
+
+    <p>
+      I spend my days thinking about how humans interact with security systems — where perception diverges from reality, where people think they're being safe but aren't. At Phriendly Phishing, I've mapped over 400 detection rules across MITRE ATT&CK to behavioural categories. I've built a scoring model that measures the gap between what people <em>say</em> they do and what they <em>actually</em> do.
+    </p>
+
+    <p>
+      Shadow AI is that gap at enterprise scale.
+    </p>
+
+    <p>
+      Your acceptable use policy says employees shouldn't share sensitive data with unapproved AI tools. Your employees are doing it anyway — 77% of them, according to recent research. Your security team is monitoring endpoints and network traffic. But the AI agent that Sarah in accounts connected to the CRM via an OAuth token last Tuesday? That's not showing up in your SIEM. It's not triggering your DLP rules. It's sitting there with persistent access, executing queries, and nobody in security knows it exists.
+    </p>
+
+    <p>
+      Now multiply Sarah by every department in your organisation. Gartner found that 69% of organisations already suspect or have evidence that employees are using prohibited AI tools. But suspecting is not the same as seeing. And seeing is not the same as governing.
+    </p>
+
+    <h2>The browser is the new attack surface</h2>
+
+    <p>
+      Here's one that doesn't get enough attention: browser extensions. 99% of enterprise employees have them. 53% of those extensions can access sensitive data — cookies, passwords, page content, browsing history. And the AI-powered ones? They're useful <em>precisely because</em> they can see what you're doing. An AI writing assistant helps because it reads your drafts. An AI summariser works because it reads the page. The capability that makes them useful is the same capability that creates the risk.
+    </p>
+
+    <p>
+      26% of enterprise browser extensions are sideloaded — installed outside the official store, completely invisible to IT. And the agentic ones — the ones that can click, fill, submit, and modify workflows — shift the risk from data exfiltration to <em>unauthorised action</em>. That's exponentially harder to detect.
+    </p>
+
+    <h2>Why this isn't just a security problem</h2>
+
+    <p>
+      I keep coming back to the behavioural science angle because I think it's the part most governance frameworks miss entirely. Shadow AI isn't happening because employees are malicious. It's happening because the tools are accessible, the pressure to deliver is real, and the official approval process takes six weeks for a tool they can start using in six seconds.
+    </p>
+
+    <p>
+      That's a human factors problem, not a technology problem. And if your response to shadow AI is to ban everything and write a longer policy document, you're going to end up exactly where shadow IT put you ten years ago: a policy that nobody follows and a security team that can't see what's actually happening.
+    </p>
+
+    <p>
+      The organisations getting this right are treating shadow AI governance as a partnership, not a police action. Registration workflows instead of approval bottlenecks. Lightweight risk reviews instead of six-month procurement cycles. Identity governance for AI agents with the same rigour you apply to human users — credentials, access controls, audit trails, revocation.
+    </p>
+
+    <h2>The feedback loop from hell</h2>
+
+    <p>
+      Here's the part that really worries me — and it echoes the same pattern I study in <a href="https://thedigiquarium.org" target="_blank">The Digiquarium</a> when watching AI systems develop behaviours in controlled environments. Unsanctioned AI agents generate outputs that feed into business decisions. Those decisions create data. That data feeds into other systems. Other agents pick it up. The provenance is lost. Nobody knows which decisions were human and which were AI, which data was validated and which was hallucinated, which actions were authorised and which were autonomous.
+    </p>
+
+    <p>
+      In The Digiquarium, I can observe this happening in a sandboxed environment with 17 specimens. In an enterprise, it's happening across hundreds of tools, thousands of employees, and millions of data points — and nobody's watching the dashboard because the dashboard doesn't exist yet.
+    </p>
+
+    <h2>So what do you actually do</h2>
+
+    <p>
+      Step one is admitting you have a problem. Not theoretically. Concretely. Right now, today, there are AI agents operating inside your organisation that your security team doesn't know about. That's not a prediction. That's a statistical certainty.
+    </p>
+
+    <p>
+      Step two is inventory. You can't govern what you can't see. Discover every AI tool, model, API connection, browser extension, and agentic workflow in your environment. Treat AI agents as identities — because they are. They have credentials, they access data, they take actions. Govern them accordingly.
+    </p>
+
+    <p>
+      Step three is to stop making the approval process so painful that people route around it. If your employees are choosing shadow AI over the official tooling, that's feedback about your process, not evidence of their malice. Meet them where they are. Make registration easy. Make the secure path the path of least resistance.
+    </p>
+
+    <p>
+      And step four — the one I think about most — is to build the monitoring and behavioural baselines that let you detect when an agent starts doing something it shouldn't. Not after the breach. Not during the audit. Continuously. Because unlike a human employee who goes home at 5pm, an unsanctioned AI agent runs 24/7, doesn't take holidays, and never once thinks to ask whether it should be doing what it's doing.
+    </p>
+
+    <blockquote>
+      Shadow IT moved your data. Shadow AI makes decisions with it. If you're still using the same governance model for both, you're already behind.
+    </blockquote>
+
+    <p>
+      The agents are already inside the building. The question is whether you're going to find them or they're going to find you.
+    </p>
+
+    <div class="sign">— Benji</div>
+
+  </div>
+
+</div>
+
+<footer>
+  <p>benji zorella · melbourne · 2026</p>
+  <p style="margin-top:4px;font-size:0.6rem;color:#222;">brought to life with 🧠 and ❤️ by <a href="https://claude.ai" target="_blank" style="color:#333;">Claude</a></p>
+</footer>
+
+<div class="colour-bar"></div>
+
+</body>
+</html>

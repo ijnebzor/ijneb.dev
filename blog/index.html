@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Benji Zorella</title>
+  <meta name="description" content="Writing by Benji Zorella on cyber security, AI, and building things.">
+  <link rel="icon" type="image/png" href="../logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #000; --surface: #0a0a0a; --border: #1a1a1a;
+      --text: #e8e8e8; --muted: #b0b0b0; --dim: #777;
+      --cyan: #00d4ff; --green: #00ff88; --orange: #ff8c42; --coral: #ff6b6b;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    a { color: var(--cyan); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: #fff; }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 28px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    nav .logo-mark {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--dim);
+    }
+    nav .logo-mark img { width: 22px; height: 22px; border-radius: 5px; }
+    nav .nav-links { display: flex; gap: 18px; }
+    nav .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--dim); }
+    nav .nav-links a:hover { color: var(--cyan); }
+    .wrap { max-width: 700px; margin: 0 auto; padding: 0 28px; }
+    .page-header { padding: 140px 0 48px; border-bottom: 1px solid var(--border); }
+    .page-header h1 { font-size: clamp(1.8rem, 4.5vw, 2.6rem); font-weight: 700; line-height: 1.2; margin-bottom: 8px; }
+    .page-header p { font-size: 0.92rem; color: var(--muted); }
+    .posts { padding: 40px 0 64px; }
+    .post-link { display: block; padding: 28px 0; border-bottom: 1px solid var(--border); transition: border-color 0.2s; }
+    .post-link:hover { border-color: var(--cyan); }
+    .post-link .date { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--dim); margin-bottom: 6px; }
+    .post-link h2 { font-size: 1.2rem; font-weight: 600; color: var(--text); margin-bottom: 6px; transition: color 0.2s; }
+    .post-link:hover h2 { color: var(--cyan); }
+    .post-link p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+    .colour-bar { height: 2px; background: linear-gradient(90deg, var(--cyan) 0%, var(--green) 35%, var(--orange) 70%, var(--coral) 100%); opacity: 0.5; }
+    footer {
+      padding: 48px 0 40px; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    footer p { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--dim); }
+    @media (max-width: 640px) {
+      .page-header { padding: 110px 0 36px; }
+      .hamburger { display: none; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 20px; height: 2px; background: var(--dim); margin: 4px 0; transition: all 0.3s; }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(3px, 4px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(3px, -4px); }
+    nav .nav-links { display: flex; }
+    @media (max-width: 640px) {
+      .hamburger { display: block; }
+      nav .nav-links { display: none; position: absolute; top: 100%; right: 0; left: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(12px); flex-direction: column; padding: 16px 28px; gap: 12px; border-bottom: 1px solid var(--border); }
+      nav .nav-links.open { display: flex; }
+    }
+    }
+  </style>
+</head>
+<body>
+
+<div class="colour-bar"></div>
+
+<nav>
+  <a class="logo-mark" href="../index.html">
+    <img src="../logo.png" alt="">
+    <span>benji zorella</span>
+  </a>
+  <button class="hamburger" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="../index.html">home</a>
+    <a href="../index.html#projects">projects</a>
+    <a href="../index.html#speaking">speaking</a>
+    <a href="../index.html#contact">contact</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <div class="page-header">
+    <h1>Blog</h1>
+    <p>Thoughts on cyber security, AI, building things, and whatever else is keeping me up at night.</p>
+  </div>
+
+  <div class="posts">
+    <a class="post-link" href="shadow-it-grew-up.html">
+      <div class="date">1 Apr 2026</div>
+      <h2>Shadow IT Grew Up and Got an API Key</h2>
+      <p>Your employees aren't just using unapproved AI tools. The tools are using your systems back.</p>
+    </a>
+    <a class="post-link" href="something-purple-this-way-comes.html">
+      <div class="date">25 Feb 2026</div>
+      <h2>Something Purple This Way Comes</h2>
+      <p>AI has a purple problem. And once you see it, you absolutely cannot unsee it.</p>
+    </a>
+    <a class="post-link" href="it-lives.html">
+      <div class="date">20 Feb 2026</div>
+      <h2>It Lives!</h2>
+      <p>The site is live. Here's why I built it and what comes next.</p>
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  <p>benji zorella · melbourne · 2026</p>
+  <p style="margin-top:4px;font-size:0.6rem;color:#222;">brought to life with 🧠 and ❤️ by <a href="https://claude.ai" target="_blank" style="color:#333;">Claude</a></p>
+</footer>
+
+<div class="colour-bar"></div>
+
+</body>
+</html>
