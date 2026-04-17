@@ -704,4 +704,16 @@
       if (clickCount >= 3) {
         clickCount = 0;
         const egg = document.getElementById('trailer-egg');
-        
+        if (egg) {
+          const isVisible = egg.style.display !== 'none';
+          egg.style.display = isVisible ? 'none' : 'block';
+          if (!isVisible) egg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
