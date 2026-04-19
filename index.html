@@ -414,7 +414,7 @@
   <!-- ═══════ GITHUB ═══════ -->
   <section id="github">
     <div class="section-title">GitHub</div>
-    <p class="intro" style="color:var(--dim);font-size:0.82rem;margin-bottom:4px;">Recently updated public repos.</p>
+    <p class="intro" style="color:var(--dim);font-size:0.82rem;margin-bottom:4px;">Recent activity across public repos.</p>
     <div id="gh-repos" class="gh-grid">
       <div class="gh-loading">Loading repos...</div>
     </div>
@@ -791,35 +791,40 @@
       }
     });
   }
-  // GitHub activity
-  const langColors = {
-    Python: '#3572A5', JavaScript: '#f1e05a', HTML: '#e34c26', CSS: '#563d7c',
-    Shell: '#89e051', TypeScript: '#3178c6', Vue: '#41b883', Dockerfile: '#384d54',
-    Markdown: '#083fa1', 'Jupyter Notebook': '#DA5B0B'
-  };
-  fetch('https://api.github.com/users/ijnebzor/repos?sort=pushed&per_page=6&type=public')
+  // GitHub activity — recent pushes only, deduped by repo
+  fetch('https://api.github.com/users/ijnebzor/events/public?per_page=30')
     .then(r => r.json())
-    .then(repos => {
+    .then(events => {
       const container = document.getElementById('gh-repos');
-      if (!repos.length || repos.message) {
-        container.innerHTML = '<div class="gh-loading">Could not load repos</div>';
+      if (!events.length || events.message) {
+        container.innerHTML = '<div class="gh-loading">Could not load activity</div>';
         return;
       }
-      container.innerHTML = repos.map(r => `
-        <div class="gh-card">
-          <h4><a href="${r.html_url}" target="_blank">${r.name}</a></h4>
-          <p>${r.description || 'No description'}</p>
-          <div class="gh-meta">
-            ${r.language ? `<span class="gh-lang" style="--lang-color:${langColors[r.language] || '#777'}">${r.language}</span>` : ''}
-            ${r.stargazers_count ? `<span>\u2605 ${r.stargazers_count}</span>` : ''}
-            ${r.forks_count ? `<span>\u2442 ${r.forks_count}</span>` : ''}
-            <span>${new Date(r.pushed_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short' })}</span>
-          </div>
-        </div>
-      `).join('');
+      const seen = new Set();
+      const pushes = events
+        .filter(e => e.type === 'PushEvent' && e.payload.commits && e.payload.commits.length)
+        .filter(e => { if (seen.has(e.repo.name)) return false; seen.add(e.repo.name); return true; })
+        .slice(0, 6);
+      if (!pushes.length) {
+        container.innerHTML = '<div class="gh-loading">No recent public activity</div>';
+        return;
+      }
+      container.innerHTML = pushes.map(e => {
+        const repo = e.repo.name.replace('ijnebzor/', '');
+        const msg = e.payload.commits[e.payload.commits.length - 1].message.split('\n')[0];
+        const date = new Date(e.created_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short' });
+        const count = e.payload.commits.length;
+        return '<div class="gh-card">' +
+          '<h4><a href="https://github.com/' + e.repo.name + '" target="_blank">' + repo + '</a></h4>' +
+          '<p>' + msg + '</p>' +
+          '<div class="gh-meta">' +
+          '<span>' + count + ' commit' + (count > 1 ? 's' : '') + '</span>' +
+          '<span>' + date + '</span>' +
+          '</div></div>';
+      }).join('');
     })
     .catch(() => {
-      document.getElementById('gh-repos').innerHTML = '<div class="gh-loading">Could not load repos</div>';
+      document.getElementById('gh-repos').innerHTML = '<div class="gh-loading">Could not load activity</div>';
     });
 
 })();
