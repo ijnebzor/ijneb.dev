@@ -183,6 +183,29 @@
       color: var(--dim); margin-bottom: 12px;
     }
 
+    /* ═══════ GITHUB ACTIVITY ═══════ */
+    .gh-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin-top: 16px; }
+    .gh-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+      padding: 16px; transition: border-color 0.3s;
+    }
+    .gh-card:hover { border-color: var(--cyan); }
+    .gh-card h4 { font-size: 0.88rem; color: var(--text); margin-bottom: 6px; }
+    .gh-card h4 a { color: var(--text); }
+    .gh-card h4 a:hover { color: var(--cyan); }
+    .gh-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; margin-bottom: 10px;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .gh-meta { display: flex; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--dim); }
+    .gh-lang { display: inline-flex; align-items: center; gap: 4px; }
+    .gh-lang::before {
+      content: ''; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--lang-color, var(--dim));
+    }
+    .gh-loading { color: var(--dim); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; padding: 20px 0; }
+    .gh-more { margin-top: 16px; }
+    .gh-more a { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--dim); transition: color 0.2s; }
+    .gh-more a:hover { color: var(--cyan); }
+
     /* ═══════ RESPONSIVE ═══════ */
     .hamburger { display: none; cursor: pointer; padding: 8px; background: none; border: none; z-index: 10; }
     .hamburger span {
@@ -344,9 +367,61 @@
         <span class="tag">Logic Pro</span><span class="tag">OBS</span><span class="tag">Twitch</span><span class="tag">BandLab</span><span class="tag">Guitar</span><span class="tag">Bass</span><span class="tag">Keys</span><span class="tag">E-Drums</span><span class="tag">Vocals</span><span class="tag">Multi-cam</span>
       </div>
     </div>
+
+    <div class="project">
+      <div class="project-header">
+        <h3>argAIntuan</h3>
+        <span class="label label-building">Building</span>
+      </div>
+      <div class="sub">Multi-agent orchestration platform · Private</div>
+      <p>
+        Parallel agent dispatch, job queue with streamed execution logs, tier-gated methodology framework, and a full messaging audit trail suitable for compliance evidence. The orchestration spine that makes parallel corpus processing possible.
+      </p>
+      <div class="stack">
+        <span class="tag">Python</span><span class="tag">Multi-agent</span><span class="tag">Job Queue</span><span class="tag">Compliance</span><span class="tag">Streaming</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <h3>renovAIter</h3>
+        <span class="label label-building">Building</span>
+      </div>
+      <div class="sub">AI-powered renovation project manager · Private</div>
+      <p>
+        Track trades, tasks, costs, and timelines for your renovation. AI assistant built in — ask anything about your project. Because managing a reno shouldn't require a second mortgage on your sanity.
+      </p>
+      <div class="stack">
+        <span class="tag">Python</span><span class="tag">AI</span><span class="tag">Project Management</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <h3>carcAIre</h3>
+        <span class="label label-building">Building</span>
+      </div>
+      <div class="sub">AI-powered car parts sourcing · Private</div>
+      <p>
+        AI-powered car parts sourcing across TecDoc, Sparesbox, eBay, wreckers, and more. Compare prices, verify fitment, and track your build — all in one place.
+      </p>
+      <div class="stack">
+        <span class="tag">Python</span><span class="tag">AI</span><span class="tag">TecDoc</span><span class="tag">Web Scraping</span><span class="tag">eBay API</span>
+      </div>
+    </div>
   </section>
 
-  <!-- ═══════ SPEAKING ═══════ -->
+  <!-- ═══════ GITHUB ═══════ -->
+  <section id="github">
+    <div class="section-title">GitHub</div>
+    <p class="intro" style="color:var(--dim);font-size:0.82rem;margin-bottom:4px;">Recently updated public repos.</p>
+    <div id="gh-repos" class="gh-grid">
+      <div class="gh-loading">Loading repos...</div>
+    </div>
+    <div class="gh-more">
+      <a href="https://github.com/ijnebzor" target="_blank">view all on github →</a>
+    </div>
+  </section>
   <section id="speaking">
     <div class="section-title">Speaking &amp; Media</div>
     <p class="intro" style="color:var(--muted);font-size:0.85rem;margin-bottom:22px;">Experienced speaker and presenter across cyber security, AI, digital transformation, and higher education. Conference stages, webinars, podcasts, customer events, and academic stakeholder sessions since 2017.</p>
@@ -712,6 +787,37 @@
       }
     });
   }
+  // GitHub activity
+  const langColors = {
+    Python: '#3572A5', JavaScript: '#f1e05a', HTML: '#e34c26', CSS: '#563d7c',
+    Shell: '#89e051', TypeScript: '#3178c6', Vue: '#41b883', Dockerfile: '#384d54',
+    Markdown: '#083fa1', 'Jupyter Notebook': '#DA5B0B'
+  };
+  fetch('https://api.github.com/users/ijnebzor/repos?sort=pushed&per_page=6&type=public')
+    .then(r => r.json())
+    .then(repos => {
+      const container = document.getElementById('gh-repos');
+      if (!repos.length || repos.message) {
+        container.innerHTML = '<div class="gh-loading">Could not load repos</div>';
+        return;
+      }
+      container.innerHTML = repos.map(r => `
+        <div class="gh-card">
+          <h4><a href="${r.html_url}" target="_blank">${r.name}</a></h4>
+          <p>${r.description || 'No description'}</p>
+          <div class="gh-meta">
+            ${r.language ? `<span class="gh-lang" style="--lang-color:${langColors[r.language] || '#777'}">${r.language}</span>` : ''}
+            ${r.stargazers_count ? `<span>\u2605 ${r.stargazers_count}</span>` : ''}
+            ${r.forks_count ? `<span>\u2442 ${r.forks_count}</span>` : ''}
+            <span>${new Date(r.pushed_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short' })}</span>
+          </div>
+        </div>
+      `).join('');
+    })
+    .catch(() => {
+      document.getElementById('gh-repos').innerHTML = '<div class="gh-loading">Could not load repos</div>';
+    });
+
 })();
 </script>
 
