@@ -370,7 +370,7 @@
 
     <div class="project">
       <div class="project-header">
-        <h3>argAIntuan</h3>
+        <h3>gargAIntuan</h3>
         <span class="label label-building">Building</span>
       </div>
       <div class="sub">Multi-agent orchestration platform · Private</div>
@@ -743,7 +743,11 @@
     "rm -rf sleep",
   ];
   const el = document.getElementById('rotating-tag');
-  if (el) el.textContent = tags[Math.floor(Math.random() * tags.length)];
+  if (el) {
+    const pick = () => tags[Math.floor(Math.random() * tags.length)];
+    el.textContent = pick();
+    setInterval(() => { el.textContent = pick(); }, 4000);
+  }
 
   // Mobile nav: close on link tap
   document.querySelectorAll('.nav-links a').forEach(a => {
