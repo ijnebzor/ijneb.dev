@@ -1,0 +1,73 @@
+/* freelAIncer — shell primitives (Phase 0 skeleton) */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--color-ink);
+  background: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--space-4);
+}
+
+h1 { font-size: var(--type-3xl); }
+h2 { font-size: var(--type-2xl); }
+h3 { font-size: var(--type-xl); }
+h4 { font-size: var(--type-lg); }
+
+p { margin: 0 0 var(--space-4); }
+
+code, pre, kbd { font-family: var(--font-mono); font-size: var(--type-sm); }
+
+a {
+  color: inherit;
+  text-decoration-color: var(--color-saffron);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border: 0;
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-5);
+  transition: transform var(--motion-fast), filter var(--motion-fast);
+}
+
+button:hover { filter: brightness(1.1); }
+button:active { transform: translateY(1px); }
+
+.container {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-5);
+}
+
+/* Status glyphs — never colour-only */
+.status::before { font-family: var(--font-mono); margin-right: var(--space-2); }
+.status--ok::before      { content: "●"; color: var(--color-olive); }
+.status--warn::before    { content: "⚠"; color: var(--color-brass); }
+.status--error::before   { content: "▲"; color: var(--color-ember); }
+.status--pending::before { content: "◐"; color: var(--color-graphite); }

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#fafaf7" />
+<meta name="referrer" content="no-referrer" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="freelAIncer" />
+<meta name="description" content="Invoicing, timesheets and project management for creative freelancers. AI copilot built in." />
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-src 'none'; frame-ancestors 'none'; worker-src 'self'; manifest-src 'self'; form-action 'self'; object-src 'none'; base-uri 'self'; upgrade-insecure-requests" />
+<link rel="manifest" href="manifest.json" />
+<title>freelAIncer</title>
+<link rel="stylesheet" href="../assets/styles/tokens.css" />
+<link rel="stylesheet" href="assets/styles/fonts.css" />
+<link rel="stylesheet" href="assets/styles/app.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <!-- Colour bar -->
+  <div class="colour-bar" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo-dot" aria-hidden="true"></div>
+    <div class="logo-group">
+      <div class="logo-text">FREELAINCER</div>
+      <div class="logo-sub">CREATIVE FREELANCER OS</div>
+    </div>
+    <div class="header-spacer"></div>
+    <div id="scopeBadge" class="badge badge-accent" aria-live="polite">ALL</div>
+  </header>
+
+  <!-- Main content area -->
+  <main class="main" id="mc" role="main"></main>
+
+  <!-- Bottom navigation -->
+  <nav class="nav" role="navigation" aria-label="Main">
+    <button class="nav-btn active" data-view="home" type="button" aria-current="page">
+      <span class="nav-icon" aria-hidden="true">&#8962;</span>
+      <span class="nav-label">Home</span>
+    </button>
+    <button class="nav-btn" data-view="projects" type="button">
+      <span class="nav-icon" aria-hidden="true">&#9635;</span>
+      <span class="nav-label">Projects</span>
+    </button>
+    <button class="nav-btn" data-view="time" type="button">
+      <span class="nav-icon" aria-hidden="true">&#9719;</span>
+      <span class="nav-label">Time</span>
+    </button>
+    <button class="nav-btn" data-view="invoices" type="button">
+      <span class="nav-icon" aria-hidden="true">&#128196;</span>
+      <span class="nav-label">Invoices</span>
+    </button>
+    <button class="nav-btn" data-view="mirror" type="button">
+      <span class="nav-icon" aria-hidden="true">&#9678;</span>
+      <span class="nav-label">Mirror</span>
+    </button>
+    <button class="nav-btn nav-more" data-view="more" type="button">
+      <span class="nav-icon" aria-hidden="true">&#9776;</span>
+      <span class="nav-label">More</span>
+    </button>
+  </nav>
+
+</div>
+
+<!-- FAB AI Buddy -->
+<button class="bfab" id="fabBuddy" type="button" aria-label="Open AI Buddy" aria-expanded="false" aria-controls="buddyPanel">&#9733;</button>
+
+<!-- AI Buddy panel -->
+<div class="bpanel" id="buddyPanel" role="dialog" aria-label="AI Buddy" aria-hidden="true">
+  <div class="bh" aria-hidden="true"></div>
+  <div class="bhdr">
+    <div class="bav" aria-hidden="true">&#9733;</div>
+    <div class="bhdr-text">
+      <div class="bnm">freelAIncer Buddy</div>
+      <div class="bst">YOUR CREATIVE COPILOT</div>
+    </div>
+  </div>
+  <div class="bscope" id="buddyScope" role="tablist" aria-label="Scope filter">
+    <button class="chip active" role="tab" aria-selected="true" data-scope="all" type="button">All</button>
+    <button class="chip" role="tab" aria-selected="false" data-scope="gig" type="button">This Gig</button>
+    <button class="chip" role="tab" aria-selected="false" data-scope="client" type="button">Client</button>
+    <button class="chip" role="tab" aria-selected="false" data-scope="vertical" type="button">Vertical</button>
+  </div>
+  <div class="bq" id="buddyQuick" role="list" aria-label="Quick suggestions"></div>
+  <div class="bmsgs" id="buddyMsgs" role="log" aria-live="polite" aria-label="Conversation"></div>
+  <div class="biw">
+    <label for="buddyInput" class="sr-only">Message</label>
+    <textarea id="buddyInput" placeholder="Ask about your work..." rows="1"></textarea>
+    <button class="bsnd" id="buddySend" type="button" aria-label="Send message">&#8593;</button>
+  </div>
+</div>
+
+<!-- Sheet overlay -->
+<div class="sov" id="sheetOverlay" aria-hidden="true"></div>
+<div class="sht" id="sheet" role="dialog" aria-hidden="true" aria-label="Detail panel">
+  <div class="shh" aria-hidden="true"></div>
+  <div class="shd">
+    <div class="stt" id="sheetTitle"></div>
+  </div>
+  <div class="sbd" id="sheetBody"></div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<!-- Hidden receipt picker — triggered by the "pick-receipt" action in app.js -->
+<input class="sr-only" id="receiptInput" type="file" accept="image/*" aria-label="Attach a receipt image" />
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/ai-scripted.js"></script>
+<script src="assets/js/app.js"></script>
+
+</body>
+</html>
