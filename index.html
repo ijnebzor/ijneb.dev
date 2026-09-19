@@ -73,11 +73,11 @@
     .pill:hover { border-color: var(--cyan); color: var(--cyan); }
 
     /* ═══════ SECTIONS ═══════ */
-    section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+    section { padding: 40px 0; border-bottom: 1px solid var(--border); }
     section:last-of-type { border-bottom: none; }
     .section-title {
       font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--dim);
-      text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 32px;
+      text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 20px;
     }
 
     /* ═══════ NOW ═══════ */
@@ -91,7 +91,7 @@
     .dot-build { background: var(--orange); box-shadow: 0 0 10px rgba(255,140,66,0.3); }
     .dot-work { background: var(--cyan); box-shadow: 0 0 10px rgba(0,212,255,0.3); }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
-    .now-text { font-size: 0.95rem; color: var(--muted); }
+    .now-text { font-size: 1.05rem; color: var(--muted); }
     .now-text strong { color: var(--text); font-weight: 600; }
 
     /* ═══════ PROJECTS ═══════ */
@@ -123,8 +123,8 @@
     /* ═══════ SPEAKING ═══════ */
     .speak-item { padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
     .speak-item:last-child { border-bottom: none; }
-    .speak-item h3 { font-size: 0.95rem; font-weight: 500; margin-bottom: 2px; }
-    .speak-item .sub { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--dim); }
+    .speak-item h3 { font-size: 1.05rem; font-weight: 500; margin-bottom: 2px; }
+    .speak-item .sub { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--dim); }
 
     /* ═══════ TECH ═══════ */
     .tech-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0 20px; }
@@ -150,7 +150,7 @@
     .rm-item p { font-size: 0.88rem; color: var(--muted); }
 
     /* ═══════ CREDS ═══════ */
-    .cred { font-size: 0.92rem; color: var(--muted); margin-bottom: 8px; }
+    .cred { font-size: 1rem; color: var(--muted); margin-bottom: 8px; }
 
     /* TIMELINE */
     .timeline { position: relative; padding-left: 40px; margin-top: 12px; }
@@ -168,8 +168,8 @@
     }
     .tl-item.accent .tl-icon { border-color: var(--cyan); box-shadow: 0 0 8px rgba(0,212,255,0.15); }
     .tl-date { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--dim); margin-bottom: 2px; }
-    .tl-content h4 { font-size: 0.92rem; color: var(--text); font-weight: 600; margin-bottom: 4px; }
-    .tl-content p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+    .tl-content h4 { font-size: 1rem; color: var(--text); font-weight: 600; margin-bottom: 4px; }
+    .tl-content p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
 
     /* ═══════ FOOTER ═══════ */
     footer {
@@ -196,7 +196,7 @@
     @media (max-width: 640px) {
       .hero { padding: 110px 0 48px; }
       .hero h1 { font-size: 2rem; }
-      section { padding: 44px 0; }
+      section { padding: 32px 0; }
       .tech-grid { grid-template-columns: repeat(2, 1fr); }
       .hamburger { display: block; }
       nav .nav-links {
@@ -277,7 +277,7 @@
     </div>
     <div class="now-item">
       <div class="now-dot dot-work"></div>
-      <div class="now-text"><strong>Human Risk Management</strong> — product ownership of Phish Focus, building frameworks that compare what people <em>say</em> they do with what they <em>actually</em> do.</div>
+      <div class="now-text"><strong>Human Risk Management</strong> — building frameworks that compare what people <em>say</em> they do with what they <em>actually</em> do.</div>
     </div>
   </section>
 
@@ -407,7 +407,7 @@
         <div class="tl-content">
           <div class="tl-date">2024–present</div>
           <h4>Product Owner — Phriendly Phishing</h4>
-          <p>Human risk management. PhishFit. Security Pulse. Phish Focus. Innovation Challenge 2025 winner. The product chapter.</p>
+          <p>Human risk management. PhishFit. Security Pulse. Innovation Challenge 2025 winner. The product chapter.</p>
         </div>
       </div>
       <div class="tl-item accent">
@@ -494,32 +494,37 @@
           <li>OSINT</li>
           <li>MITRE ATT&CK</li>
           <li>NIST CSF / NICE</li>
+          <li>AI Governance</li>
           <li>Security Awareness</li>
         </ul>
       </div>
       <div class="tech-col">
-        <h4>AI &amp; Data</h4>
+        <h4>AI &amp; Agents</h4>
         <ul>
+          <li>Multi-agent Orchestration</li>
+          <li>Agentic Harnesses</li>
+          <li>MCP Authoring &amp; Use</li>
           <li>Ollama / Local LLMs</li>
           <li>RAG / Embeddings</li>
-          <li>Agent Architecture</li>
           <li>Copilot Studio</li>
           <li>Prompt Engineering</li>
           <li>Behavioural Analytics</li>
-          <li>AI Governance</li>
         </ul>
       </div>
       <div class="tech-col">
         <h4>Dev</h4>
         <ul>
-          <li>Python</li>
-          <li>Docker / Compose</li>
-          <li>n8n Automation</li>
-          <li>API Design</li>
+          <li>Python / FastAPI</li>
+          <li>Rust</li>
+          <li>TypeScript</li>
+          <li>Svelte / Next.js</li>
           <li>HTML / CSS / JS</li>
+          <li>Docker / Compose</li>
+          <li>PostgreSQL / Redis</li>
+          <li>n8n Automation</li>
           <li>Git / GitHub</li>
           <li>Linux / Shell</li>
-          <li>MCP Servers</li>
+          <li>API Design</li>
         </ul>
       </div>
       <div class="tech-col">
